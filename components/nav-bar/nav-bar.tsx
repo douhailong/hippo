@@ -1,10 +1,10 @@
-import React from 'react';
-import MaxWidthWraper from '../max-width-wraper';
 import Link from 'next/link';
-import { Icons } from '../icons';
-import NavItems from './nav-items';
-import { buttonVariants } from '../ui/button';
+import React from 'react';
 import CartDrawer from '../cart-drawer';
+import { Icons } from '../icons';
+import MaxWidthWraper from '../max-width-wraper';
+import { buttonVariants } from '../ui/button';
+import NavItems from './nav-items';
 
 type NavBarProps = {};
 
@@ -12,16 +12,16 @@ const NavBar: React.FC<NavBarProps> = () => {
   const user = null;
 
   return (
-    <header className='sticky backdrop-blur-[6px] bg-transparent inset-x-0 top-0 z-50'>
+    <header className='sticky inset-x-0 top-0 z-50 bg-transparent backdrop-blur-[6px]'>
       <MaxWidthWraper>
-        <div className='border-b h-16 flex items-center border-gray-200'>
+        <div className='flex h-16 items-center border-b border-gray-200'>
           <div className='ml-4 lg:ml-0'>
             <Link href='/'>
-              <Icons.logo className='w-10 h-10' />
+              <Icons.logo className='h-10 w-10' />
             </Link>
           </div>
 
-          <div className='hidden lg:block lg:ml-8 lg:self-stretch'>
+          <div className='hidden lg:ml-8 lg:block lg:self-stretch'>
             <NavItems />
           </div>
 
@@ -61,7 +61,7 @@ const NavBar: React.FC<NavBarProps> = () => {
                 </div>
               )}
 
-              <div className='ml-4 lg:ml-6 flow-root'>
+              <div className='ml-4 flow-root lg:ml-6'>
                 <CartDrawer />
               </div>
             </div>

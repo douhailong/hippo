@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useCallback, useRef, useEffect } from 'react';
-import NavItem from './nav-item';
 import { PRODUCT_CATEGORIES } from '@/config';
 import { useClickAway } from '@/hooks/use-click-away';
+import { useEffect, useRef, useState } from 'react';
+import NavItem from './nav-item';
 
 type NavItemsProps = {};
 

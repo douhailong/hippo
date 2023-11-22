@@ -8,7 +8,7 @@ type MaxWidthWraperProps = {
 
 const MaxWidthWraper: React.FC<MaxWidthWraperProps> = ({
   className,
-  children,
+  children
 }) => {
   return (
     <div

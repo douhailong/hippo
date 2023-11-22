@@ -1,10 +1,10 @@
-import React from 'react';
+import { CategoryType } from '@/config';
+import { cn } from '@/lib/utils';
+import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { CategoryType } from '@/config';
+import React from 'react';
 import { Button } from '../ui/button';
-import { ChevronDown } from 'lucide-react';
-import { cn } from '@/lib/utils';
 
 type NavItemProps = {
   onClose?: () => void;
@@ -17,7 +17,7 @@ const NavItem: React.FC<NavItemProps> = ({
   open,
   category,
   onClose,
-  onTrigger,
+  onTrigger
 }) => {
   return (
     <div className='flex'>
@@ -29,8 +29,8 @@ const NavItem: React.FC<NavItemProps> = ({
         >
           {category?.label}
           <ChevronDown
-            className={cn('h-4 w-4 transition-all text-muted-foreground', {
-              '-rotate-180': open,
+            className={cn('h-4 w-4 text-muted-foreground transition-all', {
+              '-rotate-180': open
             })}
           />
         </Button>
@@ -57,7 +57,7 @@ const NavItem: React.FC<NavItemProps> = ({
                         src={item.imageSrc}
                         alt='product image'
                         fill
-                        className='transition-all object-cover object-center hover:scale-110'
+                        className='object-cover object-center transition-all hover:scale-110'
                       />
                     </div>
                     <Link

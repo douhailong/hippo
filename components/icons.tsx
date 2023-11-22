@@ -85,5 +85,5 @@ export const Icons = {
         ></path>
       </g>
     </svg>
-  ),
+  )
 };

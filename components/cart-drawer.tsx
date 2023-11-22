@@ -1,14 +1,7 @@
 'use client';
 import { ShoppingCart } from 'lucide-react';
 import React from 'react';
-import {
-  Sheet,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from './ui/sheet';
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from './ui/sheet';
 
 type CartDrawerProps = {};
 
