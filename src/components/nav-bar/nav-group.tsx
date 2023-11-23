@@ -1,13 +1,14 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
+
 import { PRODUCT_CATEGORIES } from '@/config';
 import { useClickAway } from '@/hooks/use-click-away';
-import { useEffect, useRef, useState } from 'react';
 import NavItem from './nav-item';
 
-type NavItemsProps = {};
+type NavGroupProps = {};
 
-const NavItems: React.FC<NavItemsProps> = () => {
+const NavGroup: React.FC<NavGroupProps> = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -32,7 +33,7 @@ const NavItems: React.FC<NavItemsProps> = () => {
   };
 
   return (
-    <div ref={navRef} className='flex gap-4 h-full'>
+    <div ref={navRef} className='flex h-full gap-4'>
       {PRODUCT_CATEGORIES.map((category, index) => (
         <NavItem
           key={category.value}
@@ -46,4 +47,4 @@ const NavItems: React.FC<NavItemsProps> = () => {
   );
 };
 
-export default NavItems;
+export default NavGroup;

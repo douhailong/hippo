@@ -1,9 +1,10 @@
-import { CategoryType } from '@/config';
-import { cn } from '@/lib/utils';
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+
+import { CategoryType } from '@/config';
+import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
 
 type NavItemProps = {
@@ -42,10 +43,7 @@ const NavItem: React.FC<NavItemProps> = ({
             { 'animate-in fade-in-10 slide-in-from-top-5': !open }
           )}
         >
-          <div
-            className='absolute inset-0 top-1/2 bg-white shadow'
-            aria-hidden='true'
-          />
+          <div className='absolute inset-0 top-1/2 bg-white shadow' />
           <div className='relative bg-white'>
             <div className='mx-auto max-w-7xl px-8'>
               <div className='grid grid-cols-3 gap-x-8 gap-y-10 py-16'>
@@ -66,9 +64,7 @@ const NavItem: React.FC<NavItemProps> = ({
                     >
                       {item.name}
                     </Link>
-                    <p className='mt-1' aria-hidden='true'>
-                      Shop now
-                    </p>
+                    <p className='mt-1'>Shop now</p>
                   </div>
                 ))}
                 {/* </div> */}

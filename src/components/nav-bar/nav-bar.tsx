@@ -4,7 +4,7 @@ import CartDrawer from '../cart-drawer';
 import { Icons } from '../icons';
 import MaxWidthWraper from '../max-width-wraper';
 import { buttonVariants } from '../ui/button';
-import NavItems from './nav-items';
+import NavGroup from './nav-group';
 
 type NavBarProps = {};
 
@@ -22,7 +22,7 @@ const NavBar: React.FC<NavBarProps> = () => {
           </div>
 
           <div className='hidden lg:ml-8 lg:block lg:self-stretch'>
-            <NavItems />
+            <NavGroup />
           </div>
 
           <div className='ml-auto flex items-center'>
@@ -36,9 +36,7 @@ const NavBar: React.FC<NavBarProps> = () => {
                 </Link>
               )}
 
-              {!user && (
-                <span className='h-6 w-px bg-gray-200' aria-hidden='true' />
-              )}
+              {!user && <span className='h-6 w-px bg-gray-200' />}
 
               {user ? (
                 ''
@@ -51,13 +49,11 @@ const NavBar: React.FC<NavBarProps> = () => {
                 </Link>
               )}
 
-              {user && (
-                <span className='h-6 w-px bg-gray-200' aria-hidden='true' />
-              )}
+              {user && <span className='h-6 w-px bg-gray-200' />}
 
               {!user && (
                 <div className='flex lg:ml-6'>
-                  <span className='h-6 w-px bg-gray-200' aria-hidden='true' />
+                  <span className='h-6 w-px bg-gray-200' />
                 </div>
               )}
 
