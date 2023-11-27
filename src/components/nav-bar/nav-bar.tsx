@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
+
+import Divider from '../divider';
 import CartDrawer from '../cart-drawer';
 import { Icons } from '../icons';
 import MaxWidthWraper from '../max-width-wraper';
@@ -25,7 +27,7 @@ const NavBar: React.FC<NavBarProps> = () => {
             <NavGroup />
           </div>
 
-          <div className='ml-auto flex items-center'>
+          <div className='ml-auto'>
             <div className='hidden lg:flex lg:items-center lg:justify-end lg:space-x-6'>
               {!user && (
                 <Link

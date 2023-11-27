@@ -17,12 +17,10 @@ type RootLayoutProps = { children: React.ReactNode };
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
     <html lang='en'>
-      <body
-        className={cn('relative h-full font-sans antialiased', inter.className)}
-      >
-        <main className='relative flex min-h-screen flex-col'>
+      <body className={cn('h-full font-sans antialiased', inter.className)}>
+        <main className='h-full'>
           <NavBar />
-          <div className='flex-1 flex-grow'>{children}</div>
+          <div className='h-full'>{children}</div>
         </main>
       </body>
     </html>

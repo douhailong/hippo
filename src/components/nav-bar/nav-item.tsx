@@ -44,31 +44,29 @@ const NavItem: React.FC<NavItemProps> = ({
           )}
         >
           <div className='absolute inset-0 top-1/2 bg-white shadow' />
-          <div className='relative bg-white'>
-            <div className='mx-auto max-w-7xl px-8'>
-              <div className='grid grid-cols-3 gap-x-8 gap-y-10 py-16'>
-                {/* <div className='col-span-4 col-start-1 grid grid-cols-3 gap-x-8'> */}
-                {category?.featured.map((item) => (
-                  <div key={item.name} className='group text-base sm:text-sm'>
-                    <div className='relative aspect-video overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-70'>
-                      <Image
-                        src={item.imageSrc}
-                        alt='product image'
-                        fill
-                        className='object-cover object-center transition-all hover:scale-110'
-                      />
-                    </div>
-                    <Link
-                      href={item.href}
-                      className='mt-6 block font-medium text-gray-900'
-                    >
-                      {item.name}
-                    </Link>
-                    <p className='mt-1'>Shop now</p>
+          <div className='relative mx-auto max-w-7xl bg-white px-8'>
+            <div className='grid grid-cols-3 gap-x-8 gap-y-10 py-16'>
+              {/* <div className='col-span-4 col-start-1 grid grid-cols-3 gap-x-8'> */}
+              {category?.featured.map((item) => (
+                <div key={item.name} className='group text-base sm:text-sm'>
+                  <div className='relative aspect-video overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-70'>
+                    <Image
+                      fill
+                      src={item.imageSrc}
+                      alt='product image'
+                      className='object-cover object-center transition-all hover:scale-110'
+                    />
                   </div>
-                ))}
-                {/* </div> */}
-              </div>
+                  <Link
+                    href={item.href}
+                    className='mt-6 block font-medium text-gray-900'
+                  >
+                    {item.name}
+                  </Link>
+                  <p className='mt-1'>Shop now</p>
+                </div>
+              ))}
+              {/* </div> */}
             </div>
           </div>
         </div>

@@ -25,12 +25,13 @@ const perks = [
   }
 ];
 
-const Home = () => {
+const Page = () => {
   return (
     <>
       <MaxWidthWrapper>
         <div className='mx-auto flex max-w-3xl flex-col items-center py-20 text-center'>
-          <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
+          <h1 className='text-shadow relative text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
+            <div className='gradient' />
             Your Marketplace for high-quality
             <span className='text-blue-600'> digital assets</span>.
           </h1>
@@ -76,4 +77,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Page;

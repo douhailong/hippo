@@ -4,7 +4,7 @@ module.exports = {
   plugins: [
     'prettier-plugin-packagejson',
     // 提交前再打开格式化
-    'prettier-plugin-organize-imports',
+    // 'prettier-plugin-organize-imports',
     'prettier-plugin-tailwindcss'
   ],
   // tailwindFunctions: ['clsx'],
