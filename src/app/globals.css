@@ -59,77 +59,51 @@
 }
 
 @layer components {
-  .text-shadow {
-    text-shadow:
-      rgba(19, 194, 194, 0.2) 0px 8px 20px,
-      rgba(114, 46, 209, 0.2) 0px 8px 60px,
-      rgba(19, 194, 194, 0.4) 0px 8px 80px;
+}
+
+.text-shadow {
+  text-shadow:
+    rgba(19, 194, 194, 0.2) 0px 8px 20px,
+    rgba(114, 46, 209, 0.2) 0px 8px 60px,
+    rgba(19, 194, 194, 0.4) 0px 8px 80px;
+}
+
+.gradient {
+  z-index: 10;
+  pointer-events: none;
+  position: absolute;
+  top: -110px;
+  left: 50%;
+  transform: translateX(-50%) scale(1.5);
+  width: 600px;
+  height: 300px;
+  opacity: 0.2;
+  filter: blur(69px);
+  will-change: transform;
+  animation-timeline: auto;
+  animation-range-start: normal;
+  animation-range-end: normal;
+  background: linear-gradient(
+      135deg,
+      rgb(114, 46, 209) 0%,
+      rgb(22, 119, 255) 30%,
+      rgb(245, 34, 45) 70%,
+      rgb(19, 194, 194) 100%
+    )
+    0% 0% / 200% 200%;
+  animation: 10s ease 0s infinite normal none running glow;
+}
+
+@keyframes glow {
+  0% {
+    background-position: 0px -100%;
   }
-
-  .gradient {
-    z-index: 10;
-    pointer-events: none;
-    position: absolute;
-    top: -110px;
-    left: 50%;
-    transform: translateX(-50%) scale(1.5);
-    width: 600px;
-    height: 300px;
-    opacity: 0.2;
-    filter: blur(69px);
-    will-change: transform;
-    animation-timeline: auto !important;
-    animation-range-start: normal !important;
-    animation-range-end: normal !important;
-
-    animation: 10s ease 0s infinite normal none running glow;
+  50% {
+    background-position: 200% 50%;
   }
-
-  /* @keyframes glow {
-    0% {
-      background: linear-gradient(
-          135deg,
-          rgb(114, 46, 209) 0%,
-          rgb(22, 119, 255) 30%,
-          rgb(245, 34, 45) 70%,
-          rgb(19, 194, 194) 100%
-        )
-        0% 0% / 200% 200%;
-    }
-
-    33% {
-      background: linear-gradient(
-          135deg,
-          rgb(22, 119, 255) 30%,
-          rgb(245, 34, 45) 70%,
-          rgb(19, 194, 194) 100%,
-          rgb(114, 46, 209) 0%
-        )
-        0% 0% / 200% 200%;
-    }
-
-    66% {
-      background: linear-gradient(
-          135deg,
-          rgb(114, 46, 209) 0%,
-          rgb(22, 119, 255) 30%,
-          rgb(245, 34, 45) 70%,
-          rgb(19, 194, 194) 100%
-        )
-        0% 0% / 200% 200%;
-    }
-
-    100% {
-      background: linear-gradient(
-          135deg,
-          rgb(245, 34, 45) 70%,
-          rgb(22, 119, 255) 30%,
-          rgb(19, 194, 194) 100%,
-          rgb(114, 46, 209) 0%
-        )
-        0% 0% / 200% 200%;
-    }
-  } */
+  100% {
+    background-position: 0px -100%;
+  }
 }
 
 ::-webkit-scrollbar {

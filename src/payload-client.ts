@@ -21,7 +21,9 @@ type Args = {
   options?: Partial<InitOptions>;
 };
 
-export default async function payloadClient({ options }: Args = {}) {
+export default async function payloadClient({
+  options
+}: Args = {}): Promise<Payload> {
   if (!process.env.PAYLOAD_SECRET) {
     throw new Error('PAYLOAD_SECRET is missing');
   }

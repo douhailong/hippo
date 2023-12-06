@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 
 import { Icons } from '@/components/icons';
 import { buttonVariants } from '@/components/ui/button';
@@ -13,6 +14,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { validator, Validator } from '@/lib/validator';
+import { trpc } from '@/trpc/client';
 
 type PageProps = {};
 
@@ -24,6 +26,10 @@ const Page: React.FC<PageProps> = ({}) => {
   } = useForm<Validator['credentials']>({
     resolver: zodResolver(validator.credentials)
   });
+
+  const router = useRouter();
+
+  // const {}= trpc.auth.ude
 
   const onSubmit = ({ email, password }: Validator['credentials']) => {
     console.log('values', '------');
