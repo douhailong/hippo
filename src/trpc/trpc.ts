@@ -4,8 +4,6 @@ const t = initTRPC.context().create();
 const middleware = t.middleware;
 
 const isAuth = middleware(async ({ ctx, next }) => {
-  //   const req = ctx.req;
-
   console.log(ctx, '???????????????????');
 
   return next();

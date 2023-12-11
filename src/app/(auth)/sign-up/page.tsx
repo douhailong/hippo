@@ -32,17 +32,17 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
   const router = useRouter();
 
   const { mutate, isLoading } = trpc.auth.signUp.useMutation({
-    onSuccess({ sentToEmail }) {
-      toast.success(`Verification email sent to ${sentToEmail}.`);
-      router.push(`/verify-email?to=${sentToEmail}`);
+    onSuccess({ email }) {
+      toast.success(`Verification email sent to ${email}.`);
+      router.push(`/verify-email?to=${email}`);
     },
-    onError(err) {
-      if (err.data?.code === 'CONFLICT') {
+    onError(error) {
+      if (error.data?.code === 'CONFLICT') {
         return toast.error('This email is already in use. Sign in instead?');
       }
 
-      if (err instanceof ZodError) {
-        return toast.error(err.issues[0].message);
+      if (error instanceof ZodError) {
+        return toast.error(error.issues[0].message);
       }
 
       toast.error('Something went wrong. Please try again.');

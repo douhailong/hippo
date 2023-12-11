@@ -1,77 +1,52 @@
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
+import bcrypt from 'bcrypt';
 
 import { validator } from '../../lib/validator';
-import payloadClient from '../../payload-client';
 import { publicProcedure, router } from '../trpc';
+import prisma from '../../lib/prisma';
 
 const signUp = publicProcedure
   .input(validator.credentials)
   .mutation(async ({ input }) => {
     const { email, password } = input;
 
-    const payload = await payloadClient();
-    const { docs: users } = await payload.find({
-      collection: 'users',
-      where: { email: { equals: email } }
-    });
+    const hashedPassword = await bcrypt.hash(password, 12);
 
-    if (users.length !== 0) {
-      throw new TRPCError({ code: 'CONFLICT' });
-    }
+    const user = await prisma.user.create({ data: { email, hashedPassword } });
 
-    await payload.create({
-      collection: 'users',
-      data: {
-        email,
-        password,
-        role: 'user'
-      }
-    });
+    console.log(user, 'uuuuu____________________uuuuuuuuuuu');
 
-    return { success: true, sentToEmail: email };
+    return user;
   });
 
 const signIn = publicProcedure
   .input(validator.credentials)
-  .mutation(async ({ input, ctx }) => {
+  .mutation(async ({ input }) => {
     const { email, password } = input;
-    const { res } = ctx as any;
 
-    const payload = await payloadClient();
+    const user = await prisma.user.findUnique({ where: { email } });
 
-    try {
-      await payload.login({
-        collection: 'users',
-        data: {
-          email,
-          password
-        },
-        res
-      });
-
-      return { success: true };
-    } catch (err) {
-      throw new TRPCError({ code: 'UNAUTHORIZED' });
+    if (!user || !user.hashedPassword) {
+      throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Invalid data' });
     }
+
+    const isCorrectPassword = await bcrypt.compare(
+      password,
+      user.hashedPassword
+    );
+
+    if (!isCorrectPassword) {
+      throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Password error' });
+    }
+
+    return user;
   });
 
 const verifyEmail = publicProcedure
   .input(z.object({ token: z.string() }))
   .query(async ({ input }) => {
     const { token } = input;
-
-    const payload = await payloadClient();
-    const isVerified = await payload.verifyEmail({
-      collection: 'users',
-      token
-    });
-
-    if (!isVerified) {
-      throw new TRPCError({ code: 'UNAUTHORIZED' });
-    }
-
-    return { success: true };
   });
 
 export const auth = router({
