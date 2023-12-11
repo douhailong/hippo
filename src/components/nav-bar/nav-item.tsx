@@ -8,18 +8,12 @@ import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
 
 type NavItemProps = {
-  onClose?: () => void;
   onTrigger?: () => void;
   open?: boolean;
   category?: CategoryType;
 };
 
-const NavItem: React.FC<NavItemProps> = ({
-  open,
-  category,
-  onClose,
-  onTrigger
-}) => {
+const NavItem: React.FC<NavItemProps> = ({ open, category, onTrigger }) => {
   return (
     <div className='flex'>
       <div className='flex items-center'>
@@ -47,7 +41,7 @@ const NavItem: React.FC<NavItemProps> = ({
           <div className='relative mx-auto max-w-7xl bg-white px-8'>
             <div className='grid grid-cols-3 gap-x-8 gap-y-10 py-16'>
               {/* <div className='col-span-4 col-start-1 grid grid-cols-3 gap-x-8'> */}
-              {category?.featured.map((item) => (
+              {category?.featured.map(item => (
                 <div key={item.name} className='group text-base sm:text-sm'>
                   <div className='relative aspect-video overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-70'>
                     <Image

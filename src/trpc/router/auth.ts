@@ -1,23 +1,25 @@
-import { z } from 'zod';
 import { TRPCError } from '@trpc/server';
+import { z } from 'zod';
 
-import { AppRouter, appRouter } from '../';
-import { publicProcedure, router } from '../trpc';
-import payloadClient from '../../payload-client';
 import { validator } from '../../lib/validator';
+import payloadClient from '../../payload-client';
+import { publicProcedure, router } from '../trpc';
 
 const signUp = publicProcedure
   .input(validator.credentials)
-  .mutation(async ({ input, ctx }) => {
+  .mutation(async ({ input }) => {
     const { email, password } = input;
+
     const payload = await payloadClient();
     const { docs: users } = await payload.find({
       collection: 'users',
       where: { email: { equals: email } }
     });
+
     if (users.length !== 0) {
       throw new TRPCError({ code: 'CONFLICT' });
     }
+
     await payload.create({
       collection: 'users',
       data: {
@@ -26,30 +28,32 @@ const signUp = publicProcedure
         role: 'user'
       }
     });
+
     return { success: true, sentToEmail: email };
   });
 
 const signIn = publicProcedure
   .input(validator.credentials)
-  .mutation(async ({ input }) => {
+  .mutation(async ({ input, ctx }) => {
     const { email, password } = input;
+    const { res } = ctx as any;
+
     const payload = await payloadClient();
-    const { docs: users } = await payload.find({
-      collection: 'users',
-      where: { email: { equals: email } }
-    });
-    if (users.length !== 0) {
-      throw new TRPCError({ code: 'CONFLICT' });
+
+    try {
+      await payload.login({
+        collection: 'users',
+        data: {
+          email,
+          password
+        },
+        res
+      });
+
+      return { success: true };
+    } catch (err) {
+      throw new TRPCError({ code: 'UNAUTHORIZED' });
     }
-    await payload.create({
-      collection: 'users',
-      data: {
-        email,
-        password,
-        role: 'user'
-      }
-    });
-    return { success: true, sentToEmail: email };
   });
 
 const verifyEmail = publicProcedure

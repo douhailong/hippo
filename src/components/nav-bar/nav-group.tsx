@@ -40,7 +40,6 @@ const NavGroup: React.FC<NavGroupProps> = () => {
           category={category}
           open={selectedIndex === index}
           onTrigger={() => onTrigger(index)}
-          onClose={() => setSelectedIndex(null)}
         />
       ))}
     </div>

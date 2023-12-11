@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { trpc } from '@/trpc/client';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client';
+import { useState } from 'react';
 
 type ProviderProps = {
   children: React.ReactNode;

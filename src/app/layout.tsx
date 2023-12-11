@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Toaster } from 'sonner';
 
-import QueryProviders from '@/provider/query-provider';
 import { NavBar } from '@/components/nav-bar';
 import { cn } from '@/lib/utils';
+import QueryProvider from '@/provider/query-provider';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -20,11 +21,12 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
     <html lang='en'>
       <body className={cn('h-full font-sans antialiased', inter.className)}>
         <main className='h-full'>
-          <QueryProviders>
+          <QueryProvider>
             <NavBar />
             <div className='h-full'>{children}</div>
-          </QueryProviders>
+          </QueryProvider>
         </main>
+        <Toaster position='top-center' richColors />
       </body>
     </html>
   );

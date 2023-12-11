@@ -16,7 +16,7 @@ async function bootstrap() {
   const payload = await payloadClient({
     options: {
       express: app,
-      onInit: async (cms) => {
+      onInit: async cms => {
         cms.logger.info(`Admin URL: ${cms.getAdminURL()}`);
       }
     }
@@ -33,11 +33,11 @@ async function bootstrap() {
   app.use((req, res) => nextHandler(req, res));
 
   nextApp.prepare().then(() => {
-    // payload.logger.info('Next.js started');
+    payload.logger.info('Next.js started');
     app.listen(PORT, async () => {
-      // payload.logger.info(
-      //   `Next.js App URL: ${process.env.NEXT_PUBLIC_SERVER_URL}`
-      // );
+      payload.logger.info(
+        `Next.js App URL: ${process.env.NEXT_PUBLIC_SERVER_URL}`
+      );
     });
   });
 }

@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
 
-import Divider from '../divider';
 import CartDrawer from '../cart-drawer';
 import { Icons } from '../icons';
 import MaxWidthWraper from '../max-width-wraper';

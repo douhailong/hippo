@@ -18,5 +18,7 @@ module.exports = {
   printWidth: 80,
   bracketSpacing: true,
   arrowParens: 'always',
-  useTabs: false
+  useTabs: false,
+  bracketSameLine: false, // jsx括号换行
+  arrowParens: 'avoid'
 };

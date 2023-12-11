@@ -6,6 +6,8 @@ import { ArrowRight } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { ZodError } from 'zod';
 
 import { Icons } from '@/components/icons';
 import { buttonVariants } from '@/components/ui/button';
@@ -16,9 +18,9 @@ import { cn } from '@/lib/utils';
 import { validator, Validator } from '@/lib/validator';
 import { trpc } from '@/trpc/client';
 
-type PageProps = {};
+type SignUpProps = {};
 
-const Page: React.FC<PageProps> = ({}) => {
+const SignUp: React.FC<SignUpProps> = ({}) => {
   const {
     register,
     handleSubmit,
@@ -29,11 +31,26 @@ const Page: React.FC<PageProps> = ({}) => {
 
   const router = useRouter();
 
-  // const {}= trpc.auth.ude
+  const { mutate, isLoading } = trpc.auth.signUp.useMutation({
+    onSuccess({ sentToEmail }) {
+      toast.success(`Verification email sent to ${sentToEmail}.`);
+      router.push(`/verify-email?to=${sentToEmail}`);
+    },
+    onError(err) {
+      if (err.data?.code === 'CONFLICT') {
+        return toast.error('This email is already in use. Sign in instead?');
+      }
 
-  const onSubmit = ({ email, password }: Validator['credentials']) => {
-    console.log('values', '------');
-  };
+      if (err instanceof ZodError) {
+        return toast.error(err.issues[0].message);
+      }
+
+      toast.error('Something went wrong. Please try again.');
+    }
+  });
+
+  const onSubmit = ({ email, password }: Validator['credentials']) =>
+    mutate({ email, password });
 
   return (
     <div className='container flex flex-col items-center justify-center pt-20 lg:px-0'>
@@ -97,4 +114,4 @@ const Page: React.FC<PageProps> = ({}) => {
   );
 };
 
-export default Page;
+export default SignUp;
