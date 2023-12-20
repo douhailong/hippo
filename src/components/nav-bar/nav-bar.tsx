@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
+import { usePathname } from 'next/navigation';
 
 import CartDrawer from '../cart-drawer';
 import { Icons } from '../icons';

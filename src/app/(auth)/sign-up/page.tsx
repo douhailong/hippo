@@ -21,6 +21,8 @@ import { trpc } from '@/trpc/client';
 type SignUpProps = {};
 
 const SignUp: React.FC<SignUpProps> = ({}) => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -28,8 +30,6 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
   } = useForm<Validator['credentials']>({
     resolver: zodResolver(validator.credentials)
   });
-
-  const router = useRouter();
 
   const { mutate, isLoading } = trpc.auth.signUp.useMutation({
     onSuccess({ email }) {
@@ -53,62 +53,60 @@ const SignUp: React.FC<SignUpProps> = ({}) => {
     mutate({ email, password });
 
   return (
-    <div className='container flex flex-col items-center justify-center pt-20 lg:px-0'>
-      <div className='mx-auto flex w-full max-w-[350px] flex-col justify-center space-y-2'>
-        <div className='flex flex-col items-center space-y-2 text-center'>
-          <Icons.logo className='h-20 w-20' />
-          <h1 className='text-2xl font-semibold tracking-tight'>
-            Create an account
-          </h1>
-          <Link
-            className={buttonVariants({
-              variant: 'link',
-              className: 'gap-1.5'
-            })}
-            href='/sign-in'
-          >
-            Already have an account? Sign-in
-            <ArrowRight className='h-4 w-4' />
-          </Link>
-        </div>
-        <div className='grid gap-6'>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='grid gap-2'>
-              <div className='grid gap-1 py-2'>
-                <Label htmlFor='email'>Email</Label>
-                <Input
-                  {...register('email')}
-                  className={cn({
-                    'focus-visible:ring-red-500': errors.email
-                  })}
-                  placeholder='Email'
-                />
-                {errors?.email && (
-                  <p className='text-sm text-red-500'>
-                    {errors.email.message as string}
-                  </p>
-                )}
-              </div>
-              <div className='grid gap-1 py-2'>
-                <Label htmlFor='password'>Password</Label>
-                <Input
-                  {...register('password')}
-                  className={cn({
-                    'focus-visible:ring-red-500': errors.password
-                  })}
-                  placeholder='Password'
-                  type='password'
-                />
-                {errors?.password && (
-                  <p className='text-sm text-red-500'>
-                    {errors.password.message as string}
-                  </p>
-                )}
-              </div>
-              <Button>Sign up</Button>
+    <div className='mx-auto w-full max-w-[350px] py-8'>
+      <div className='flex flex-col items-center space-y-1 text-center'>
+        <Icons.logo className='h-20 w-20' />
+        <h1 className='text-2xl font-semibold tracking-tight'>
+          Create an account
+        </h1>
+        <Link
+          className={buttonVariants({
+            variant: 'link',
+            className: 'gap-1.5'
+          })}
+          href='/sign-in'
+        >
+          Already have an account? Sign-in
+          <ArrowRight className='h-4 w-4' />
+        </Link>
+      </div>
+      <div className='grid gap-6'>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className='grid gap-6'>
+            <div className='relative grid gap-1'>
+              <Label htmlFor='email'>Email</Label>
+              <Input
+                {...register('email')}
+                className={cn({
+                  'focus-visible:ring-red-500': errors.email
+                })}
+                placeholder='Email'
+              />
+              {errors?.email && (
+                <p className='absolute -bottom-[22px] text-sm text-red-500'>
+                  {errors.email.message as string}
+                </p>
+              )}
             </div>
-          </form>
-        </div>
+            <div className='relative grid gap-1'>
+              <Label htmlFor='password'>Password</Label>
+              <Input
+                {...register('password')}
+                className={cn({
+                  'focus-visible:ring-red-500': errors.password
+                })}
+                placeholder='Password'
+                type='password'
+              />
+              {errors?.password && (
+                <p className='absolute -bottom-[22px] text-sm text-red-500'>
+                  {errors.password.message as string}
+                </p>
+              )}
+            </div>
+            <Button>Sign up</Button>
+          </div>
+        </form>
       </div>
     </div>
   );

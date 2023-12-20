@@ -68,7 +68,7 @@
     rgba(19, 194, 194, 0.4) 0px 8px 80px;
 }
 
-.gradient {
+.linear-gradient {
   z-index: 10;
   pointer-events: none;
   position: absolute;

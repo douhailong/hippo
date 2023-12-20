@@ -48,7 +48,7 @@ const NavItem: React.FC<NavItemProps> = ({ open, category, onTrigger }) => {
                       fill
                       src={item.imageSrc}
                       alt='product image'
-                      className='object-cover object-center transition-all hover:scale-110'
+                      className='object-cover object-center transition-all'
                     />
                   </div>
                   <Link
