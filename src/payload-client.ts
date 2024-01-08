@@ -47,7 +47,7 @@ export default async function payloadClient({
     cached.promise = payload.init({
       email: {
         transport: transport,
-        fromAddress: '1804610117@qq.com',
+        fromAddress: 'douhailong666@gmail.com',
         fromName: 'hippo'
       },
       secret: process.env.PAYLOAD_SECRET,
