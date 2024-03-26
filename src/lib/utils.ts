@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-// import nodemailer from 'nodemailer';
+import nodemailer from 'nodemailer';
+import { SendTemplate } from '../components/emails/send-template';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -31,16 +32,44 @@ export const formatPrice: FormatPrice = (price, options = {}) => {
 
 // SendEmail
 
-type EmailOptions = { host: string; user: string; pass: string };
+type ParamKey =
+  | 'from'
+  | 'to'
+  | 'subject'
+  | 'actionLabel'
+  | 'buttonText'
+  | 'verificationToken';
 
-export const sendEmail = ({}) => {
-  // const transporter = nodemailer.createTransport({
-  //   host: 'smtp.qq.com', // 第三方邮箱的主机地址
-  //   port: 465,
-  //   secure: true,
-  //   auth: {
-  //     user: '1804610117@qq.com', // 发送方邮箱的账号
-  //     pass: 'ltoijznrfrobdbig' // 邮箱授权密码
-  //   }
-  // });
+type EmailOptions = {
+  [K in ParamKey]: string;
 };
+
+// export const sendEmail = async ({
+//   from,
+//   to,
+//   subject,
+//   actionLabel,
+//   buttonText,
+//   verificationToken
+// }: EmailOptions) => {
+//   const transporter = nodemailer.createTransport({
+//     host: 'smtp.resend.com',
+//     secure: true,
+//     port: 465,
+//     auth: {
+//       user: 'resend',
+//       pass: process.env.RESEND_API_KEY
+//     }
+//   });
+
+//   await transporter.sendMail({
+//     from: from ?? 'Hippo@resend.dev',
+//     to,
+//     subject,
+//     html: SendTemplate({
+//       actionLabel,
+//       buttonText,
+//       href: `${process.env.NEXT_PUBLIC_SERVER_URL}/verify-email?token=${verificationToken}`
+//     })
+//   });
+// };

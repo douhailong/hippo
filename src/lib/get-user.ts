@@ -15,7 +15,6 @@ export async function getUser(
     const payload = jwtHelper.verifyToken(token);
     const user = await prisma.user.findUnique({ where: { id: payload.id } });
 
-    console.log(user, '--///----');
 
     return user;
   } catch (err) {

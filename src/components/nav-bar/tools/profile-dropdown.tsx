@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { UserCircle2, User2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 import {
@@ -13,8 +14,8 @@ import {
   DropdownMenuTrigger,
   DropdownMenuItem,
   DropdownMenuSeparator
-} from '../ui/dropdown-menu';
-import { Button } from '../ui/button';
+} from '../../ui/dropdown-menu';
+import { Button } from '../../ui/button';
 import { trpc } from '@/trpc/client';
 import { User } from '@prisma/client';
 
@@ -33,8 +34,9 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ user }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className='overflow-visible'>
-        <Button variant='ghost' size='sm' className='relative'>
-          My Account
+        <Button variant='ghost' size='sm'>
+          {/* My Account */}
+          <User2 className='h-6 w-6 text-gray-400 group-hover:text-gray-500' />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-56 bg-white text-gray-900' align='end'>

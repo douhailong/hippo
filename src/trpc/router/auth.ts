@@ -1,50 +1,41 @@
-import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
-import nodemailer from 'nodemailer';
-import { cookies } from 'next/headers';
+import { TRPCError } from '@trpc/server';
 
 import { validator } from '../../lib/validator';
 import { publicProcedure, router } from '../trpc';
 import prisma from '../../lib/prisma';
 import { jwtHelper } from '../../lib/jwt-helper';
+import { SendTemplate } from '../../components/emails/send-template';
+// import { sendEmail } from '../../lib/utils';
 
 const signUp = publicProcedure
   .input(validator.credentials)
   .mutation(async ({ input }) => {
     const { email, password } = input;
-    const from = '1804610117@qq.com';
     const to = 'douhailong666@gmail.com';
 
-    const oldUser = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma.user.findUnique({ where: { email } });
 
-    if (oldUser) {
+    if (user) {
       throw new TRPCError({ code: 'CONFLICT' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
     const verificationToken = crypto.randomUUID();
 
-    const freshUser = await prisma.user.create({
+    await prisma.user.create({
       data: { email, hashedPassword, verificationToken }
     });
 
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.qq.com',
-      port: 465,
-      secure: true,
-      auth: {
-        user: from,
-        pass: 'ltoijznrfrobdbig'
-      }
-    });
-
-    await transporter.sendMail({
-      from: from,
-      to: to,
-      subject: 'Verify your accountg',
-      html: `<a href=${process.env.NEXT_PUBLIC_SERVER_URL}/verify-email?token=${verificationToken}>Verify your account</a>`
-    });
+    // await sendEmail({
+    //   to,
+    //   verificationToken,
+    //   from: 'Hippo@resend.dev',
+    //   subject: 'Welcome to Hippo',
+    //   actionLabel: 'verify your account',
+    //   buttonText: 'Verify Account'
+    // });
 
     return { success: true, sentToEmail: email };
   });

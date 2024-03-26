@@ -5,10 +5,12 @@ import { cookies } from 'next/headers';
 import CartDrawer from '../cart-drawer';
 import { Icons } from '../icons';
 import MaxWidthWraper from '../max-width-wraper';
-import { buttonVariants } from '../ui/button';
-import NavGroup from './nav-group';
-import ProfileDropdown from './profile-dropdown';
+import { Button, buttonVariants } from '../ui/button';
+import NavGroup from './tools/nav-group';
+import ProfileDropdown from './tools/profile-dropdown';
 import { getUser } from '@/lib/get-user';
+import MobileNav from './tools/mobile-nav';
+import ThemeDropdown from './tools/theme-dropdown';
 
 type NavBarProps = {};
 
@@ -27,46 +29,47 @@ const NavBar: React.FC<NavBarProps> = async () => {
             </Link>
           </div>
 
-          <div className='hidden lg:ml-8 lg:block lg:self-stretch'>
+          <MobileNav />
+
+          <div className='max-lg:hidden lg:ml-8 lg:self-stretch'>
             <NavGroup />
           </div>
 
-          <div className='ml-auto'>
-            <div className='hidden lg:flex lg:items-center lg:justify-end lg:space-x-6'>
-              {!user && (
-                <Link
-                  href='/sign-in'
-                  className={buttonVariants({ variant: 'ghost' })}
-                >
-                  Sign in
-                </Link>
-              )}
+          <div className='ml-auto hidden lg:flex lg:items-center lg:justify-end lg:space-x-6'>
+            {!user && (
+              <Link
+                href='/sign-in'
+                className={buttonVariants({ variant: 'ghost' })}
+              >
+                Sign in
+              </Link>
+            )}
 
-              {!user && <span className='h-6 w-px bg-gray-200' />}
+            {!user && <span className='h-6 w-px bg-gray-200' />}
 
-              {user ? (
-                <ProfileDropdown user={user} />
-              ) : (
-                <Link
-                  href='/sign-up'
-                  className={buttonVariants({ variant: 'ghost' })}
-                >
-                  Create account
-                </Link>
-              )}
+            {user ? (
+              <ProfileDropdown user={user} />
+            ) : (
+              <Link
+                href='/sign-up'
+                className={buttonVariants({ variant: 'ghost' })}
+              >
+                Get Started
+              </Link>
+            )}
+            {/* <ThemeDropdown /> */}
 
-              {user && <span className='h-6 w-px bg-gray-200' />}
+            {/* {user && <span className='h-6 w-px bg-gray-200' />} */}
 
-              {!user && (
-                <div className='flex lg:ml-6'>
-                  <span className='h-6 w-px bg-gray-200' />
-                </div>
-              )}
-
-              <div className='ml-4 flow-root lg:ml-6'>
-                <CartDrawer />
+            {/* {!user && (
+              <div className='flex lg:ml-6'>
+                <span className='h-6 w-px bg-gray-200' />
               </div>
-            </div>
+            )} */}
+
+            {/* <div className='ml-4 flow-root lg:ml-6'>
+              <CartDrawer />
+            </div> */}
           </div>
         </div>
       </MaxWidthWraper>

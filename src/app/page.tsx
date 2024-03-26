@@ -47,7 +47,7 @@ const Page = () => {
             <Button variant='ghost'>Our quality promise &rarr;</Button>
           </div>
         </div>
-        <ProductReel title='Title' subtitle='Subtitle' href='kkkk' />
+        <ProductReel title='This is a title...' href='/products?sort=recent' />
       </MaxWidthWrapper>
       <article className='border-t border-gray-200 bg-gray-50'>
         <MaxWidthWrapper className='py-20'>
