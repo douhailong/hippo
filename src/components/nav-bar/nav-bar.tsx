@@ -11,6 +11,7 @@ import ProfileDropdown from './tools/profile-dropdown';
 import { getUser } from '@/lib/get-user';
 import MobileNav from './tools/mobile-nav';
 import ThemeDropdown from './tools/theme-dropdown';
+import NavigationGroup from './components/navigation-group';
 
 type NavBarProps = {};
 
@@ -29,13 +30,31 @@ const NavBar: React.FC<NavBarProps> = async () => {
             </Link>
           </div>
 
-          <MobileNav />
+          <NavigationGroup />
 
-          <div className='max-lg:hidden lg:ml-8 lg:self-stretch'>
-            <NavGroup />
+          <div className='ml-auto flex gap-3'>
+            <Link
+              href='/sign-in'
+              className={buttonVariants({ variant: 'ghost' })}
+            >
+              Sign in
+            </Link>
+
+            <Link
+              href='/sign-up'
+              className={buttonVariants({ variant: 'secondary' })}
+            >
+              Get Started
+            </Link>
           </div>
 
-          <div className='ml-auto hidden lg:flex lg:items-center lg:justify-end lg:space-x-6'>
+          {/* <MobileNav /> */}
+
+          {/* <div className='max-lg:hidden lg:ml-8 lg:self-stretch'>
+            <NavGroup />
+          </div> */}
+
+          {/* <div className='ml-auto hidden lg:flex lg:items-center lg:justify-end lg:space-x-6'>
             {!user && (
               <Link
                 href='/sign-in'
@@ -57,20 +76,20 @@ const NavBar: React.FC<NavBarProps> = async () => {
                 Get Started
               </Link>
             )}
-            {/* <ThemeDropdown /> */}
+            <ThemeDropdown />
 
-            {/* {user && <span className='h-6 w-px bg-gray-200' />} */}
+            {user && <span className='h-6 w-px bg-gray-200' />}
 
-            {/* {!user && (
+            {!user && (
               <div className='flex lg:ml-6'>
                 <span className='h-6 w-px bg-gray-200' />
               </div>
-            )} */}
+            )}
 
-            {/* <div className='ml-4 flow-root lg:ml-6'>
+            <div className='ml-4 flow-root lg:ml-6'>
               <CartDrawer />
-            </div> */}
-          </div>
+            </div>
+          </div> */}
         </div>
       </MaxWidthWraper>
     </header>

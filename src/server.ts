@@ -15,6 +15,8 @@ const createContext = ({
 }: trpcExpress.CreateExpressContextOptions) => ({ req, res });
 
 async function bootstrap() {
+  console.log('lllllllllllllllll');
+
   app.use(
     '/api/trpc',
     trpcExpress.createExpressMiddleware({
