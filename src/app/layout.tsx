@@ -22,7 +22,7 @@ const RootLayout = ({ children }: React.PropsWithChildren) => {
         <main className='flex min-h-screen flex-col'>
           <QueryProvider>
             <NavBar />
-            <div className='flex-1'>{children}</div>
+            <div className='flex-1'>{}</div>
             <Footer />
           </QueryProvider>
         </main>
