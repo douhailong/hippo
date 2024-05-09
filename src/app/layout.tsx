@@ -2,7 +2,7 @@ import { Inter } from 'next/font/google';
 import { Toaster } from 'sonner';
 import type { Metadata } from 'next';
 
-import { NavBar } from '@/components/nav-bar';
+import NavBar from '@/components/nav-bar';
 import Footer from '@/components/footer';
 import { cn } from '@/lib/utils';
 import QueryProvider from '@/provider/query-provider';

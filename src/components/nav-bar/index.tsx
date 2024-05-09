@@ -1,8 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { cookies } from 'next/headers';
-import { Command, Search, AlignRight } from 'lucide-react';
+import { Command, Search, AlignRight, Bell } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Separator } from '@/components/ui/separator';
 
 import CartDrawer from '../cart-drawer';
 import { Icons } from '../icons';
@@ -21,6 +22,8 @@ const NavBar: React.FC<NavBarProps> = async () => {
   const cookieStore = cookies();
 
   const user = await getUser(cookieStore);
+
+  const valid = false;
 
   return (
     <header className='sticky inset-x-0 top-0 z-50 border-b border-gray-200 bg-transparent backdrop-blur-xl'>
@@ -64,7 +67,7 @@ const NavBar: React.FC<NavBarProps> = async () => {
           <AlignRight className='h-5 w-5 cursor-pointer' />
         </nav>
 
-        <nav className='ml-auto flex items-center gap-3 max-lg:hidden'>
+        <nav className='ml-auto flex items-center gap-4 max-lg:hidden'>
           <button className='flex h-8 w-60 items-center justify-between whitespace-nowrap rounded-md bg-zinc-100 px-2 text-sm text-gray-400'>
             Type keywords...
             <div className='ml-4 flex h-5 items-center rounded-md bg-white px-1.5 text-xs font-medium leading-5 text-gray-950 ring-1 ring-inset ring-gray-200'>
@@ -73,24 +76,41 @@ const NavBar: React.FC<NavBarProps> = async () => {
             </div>
           </button>
 
-          <Avatar className='h-8 w-8 cursor-pointer outline outline-1 outline-offset-1 outline-gray-100'>
-            <AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+          <Separator orientation='vertical' className='h-4' />
 
-          <Link
-            href='/sign-in'
-            className={buttonVariants({ variant: 'outline', size: 'sm' })}
-          >
-            Sign in
-          </Link>
+          {valid && (
+            <div className='relative'>
+              <Bell className='h-5 w-5 cursor-pointer text-gray-800 transition-all hover:scale-105' />
+              <p className='absolute -right-0.5 -top-0.5 h-1 w-1 rounded-full bg-red-600' />
+            </div>
+          )}
 
-          <Link
-            href='/sign-up'
-            className={buttonVariants({ variant: 'default', size: 'sm' })}
-          >
-            Get Started
-          </Link>
+          {valid && <Separator orientation='vertical' className='h-4' />}
+
+          {valid && (
+            <Avatar className='h-8 w-8 cursor-pointer transition-all hover:scale-105'>
+              <AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+          )}
+
+          {!valid && (
+            <Link
+              href='/sign-in'
+              className={buttonVariants({ variant: 'outline', size: 'sm' })}
+            >
+              Sign in
+            </Link>
+          )}
+
+          {!valid && (
+            <Link
+              href='/sign-up'
+              className={buttonVariants({ variant: 'default', size: 'sm' })}
+            >
+              Get Started
+            </Link>
+          )}
         </nav>
 
         {/* <MobileNav /> */}
