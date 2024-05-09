@@ -1,31 +1,44 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { Sun, MoonStar, Laptop2, Github, Twitter } from 'lucide-react';
+import { Sun, Moon, Laptop2, Github, Twitter } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 import MaxWidthWraper from './max-width-wraper';
 
 type FooterProps = {};
 
 const Footer: React.FC<FooterProps> = ({}) => {
+  const { setTheme } = useTheme();
+
   return (
     <footer className='border-t border-gray-200 px-6 py-8'>
       <div className='flex items-center justify-between'>
         <div className='flex flex-col gap-2'>
-          <p className='text-sm text-muted-foreground'>
+          <p className='text-muted-foreground'>
             &copy; {new Date().getFullYear()} Snake, Inc.
           </p>
-          <div className='flex gap-2'>
+          <div className='text-sm text-muted-foreground'>
+            Made with <span className='text-rose-400'>❤</span> by
+          </div>
+          {/* <div className='flex gap-2'>
             <Github className='h-5 w-5 text-gray-500' />
             <Twitter className='h-5 w-5 text-gray-500' />
-          </div>
+          </div> */}
         </div>
-        <ToggleGroup type='single' size='sm'>
+        <ToggleGroup
+          type='single'
+          size='sm'
+          defaultValue='light'
+          onValueChange={value => setTheme(value)}
+        >
           <ToggleGroupItem value='light'>
             <Sun className='h-5 w-5 text-gray-600' />
           </ToggleGroupItem>
           <ToggleGroupItem value='dark'>
-            <MoonStar className='h-5 w-5 text-gray-600' />
+            <Moon className='h-5 w-5 text-gray-600' />
           </ToggleGroupItem>
           <ToggleGroupItem value='device'>
             <Laptop2 className='h-5 w-5 text-gray-600' />
