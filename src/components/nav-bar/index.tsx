@@ -23,42 +23,32 @@ const NavBar: React.FC<NavBarProps> = async () => {
 
   const user = await getUser(cookieStore);
 
-  const valid = false;
+  const valid = true;
 
   return (
     <header className='sticky inset-x-0 top-0 z-50 border-b border-gray-200 bg-transparent backdrop-blur-xl'>
-      {/* <MaxWidthWraper> */}
       <div className='mx-auto flex h-16 max-w-screen-2xl items-center px-8'>
-        {/* <div className='ml-4 lg:ml-0'>
-          <Link href='/'>
-            <Icons.logo className='h-10 w-10' />
-          </Link>
-        </div>
-
-        <NavigationGroup /> */}
-        <Avatar className='h-8 w-8 cursor-pointer outline outline-1 outline-offset-1 outline-gray-100'>
-          <AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-
-        <nav className='ml-3 flex items-center gap-2 max-lg:hidden'>
+        <Link href='/'>
+          <Icons.logo className='h-6 w-6' />
+        </Link>
+        <nav className='ml-4 flex items-center gap-2 max-lg:hidden'>
           <Link
-            href='/sign-up'
+            href='/share'
             className={buttonVariants({ variant: 'ghost', size: 'sm' })}
           >
-            Get Started
+            Share
           </Link>
           <Link
-            href='/sign-up'
+            href='/popular'
             className={buttonVariants({ variant: 'ghost', size: 'sm' })}
           >
-            Get Started
+            Popular
           </Link>
           <Link
-            href='/sign-up'
+            href='/subscribe'
             className={buttonVariants({ variant: 'ghost', size: 'sm' })}
           >
-            Get Started
+            Subscribe
           </Link>
         </nav>
 
@@ -81,17 +71,22 @@ const NavBar: React.FC<NavBarProps> = async () => {
           {valid && (
             <div className='relative'>
               <Bell className='h-5 w-5 cursor-pointer text-gray-800 transition-all hover:scale-105' />
-              <p className='absolute -right-0.5 -top-0.5 h-1 w-1 rounded-full bg-red-600' />
+              <p className='absolute -right-0.5 -top-0.5 h-1 w-1 animate-pulse rounded-full bg-red-600' />
             </div>
           )}
 
           {valid && <Separator orientation='vertical' className='h-4' />}
 
           {valid && (
-            <Avatar className='h-8 w-8 cursor-pointer transition-all hover:scale-105'>
-              <AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+            <Link href='/user'>
+              <Avatar className='h-8 w-8 cursor-pointer transition-all hover:scale-105'>
+                <AvatarImage
+                  src='https://github.com/shadcn.png'
+                  alt='@shadcn'
+                />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </Link>
           )}
 
           {!valid && (
@@ -156,7 +151,6 @@ const NavBar: React.FC<NavBarProps> = async () => {
             </div>
           </div> */}
       </div>
-      {/* </MaxWidthWraper> */}
     </header>
   );
 };

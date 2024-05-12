@@ -5,6 +5,7 @@ const nextConfig = {
     console.log('----------aaaaaaaaa----------');
     return [{ source: '/aaa', destination: '/sign-in', permanent: true }];
   }
+  // reactStrictMode: false
 };
 
 export default nextConfig;

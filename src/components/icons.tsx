@@ -1,7 +1,7 @@
 import { LucideProps } from 'lucide-react';
 
 export const Icons = {
-  logo: (props: LucideProps) => (
+  logo2: (props: LucideProps) => (
     <svg {...props} viewBox='0 0 512 512'>
       <g>
         <path
@@ -84,6 +84,11 @@ export const Icons = {
           opacity='1'
         ></path>
       </g>
+    </svg>
+  ),
+  logo: (props: LucideProps) => (
+    <svg viewBox='0 0 16 16' {...props}>
+      <path d='M8 1L16 15H0L8 1Z' fill='currentColor'></path>
     </svg>
   )
 };
