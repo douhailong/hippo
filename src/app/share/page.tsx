@@ -1,13 +1,4 @@
-'use client';
-
-import React, {
-  useRef,
-  useEffect,
-  useState,
-  useLayoutEffect,
-  useMemo,
-  useCallback
-} from 'react';
+import React from 'react';
 
 import Note from './components/note';
 import MaxWidthWraper from '@/components/max-width-wraper';
@@ -29,7 +20,7 @@ const Page: React.FC<PageProps> = ({}) => {
   return (
     <div>
       <MaxWidthWraper>
-        <Virtual col={3} gap={6} dataSource={dataSource}>
+        <Virtual col={4} gap={12} dataSource={dataSource}>
           <Note />
         </Virtual>
       </MaxWidthWraper>

@@ -6,8 +6,8 @@ import type { VirtualNoteProps } from './virtual';
 
 type NoteProps = {
   className?: string;
-  data: VirtualNoteProps;
-  onClick: () => void;
+  data?: VirtualNoteProps;
+  onClick?: () => void;
 };
 
 const Note: React.FC<NoteProps> = ({
@@ -19,10 +19,10 @@ const Note: React.FC<NoteProps> = ({
   return (
     <div
       className={cn(className, 'h-full w-full bg-red-400')}
-      onClick={() => console.log(data, 'data')}
+      // onClick={() => console.log(data, 'data')}
       {...restProps}
     >
-      <img className='h-full w-full' src={data.url} />
+      <img className='h-full w-full' src={data?.url} />
     </div>
   );
 };
