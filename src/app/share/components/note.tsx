@@ -1,13 +1,30 @@
 import React from 'react';
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
-type NoteProps = {};
+import type { VirtualNoteProps } from './virtual';
 
-const url =
-  'https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/eed870191122341.65c5dd0da5ad2.jpg';
+type NoteProps = {
+  className?: string;
+  data: VirtualNoteProps;
+  onClick: () => void;
+};
 
-const Note: React.FC<NoteProps> = ({}) => {
-  return <div>111</div>;
+const Note: React.FC<NoteProps> = ({
+  className,
+  data,
+  onClick,
+  ...restProps
+}) => {
+  return (
+    <div
+      className={cn(className, 'h-full w-full bg-red-400')}
+      onClick={() => console.log(data, 'data')}
+      {...restProps}
+    >
+      <img className='h-full w-full' src={data.url} />
+    </div>
+  );
 };
 
 export default Note;

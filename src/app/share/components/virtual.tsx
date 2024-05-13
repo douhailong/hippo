@@ -2,9 +2,11 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 
-type DataSource = { id: string; width: number; height: number };
+type Data = { id: string; width: number; height: number; url: string };
 
-type Position = DataSource & {
+type Position = {
+  width: number;
+  height: number;
   offsetX: number;
   offsetY: number;
 };
@@ -12,10 +14,12 @@ type Position = DataSource & {
 type VirtualProps = {
   gap: number;
   col: number;
-  dataSource: DataSource[];
+  dataSource: Data[];
   onChange?: () => void;
-  children: React.ReactNode;
+  children: React.ReactElement;
 };
+
+export type VirtualNoteProps = {} & Data;
 
 const Virtual: React.FC<VirtualProps> = ({
   gap,
@@ -36,6 +40,8 @@ const Virtual: React.FC<VirtualProps> = ({
 
     setPositions(positions1(noteWidth));
   }, []);
+
+  console.log('xxxxxxxxxxxxxxx');
 
   const minColumn = (columns: number[]) => {
     let height = Infinity;
@@ -61,7 +67,6 @@ const Virtual: React.FC<VirtualProps> = ({
       const height = (width * curData.height) / curData.width;
 
       result.push({
-        id: i.toString(),
         width,
         height,
         offsetX: (minColIndex % col) * (width + gap),
@@ -90,8 +95,7 @@ const Virtual: React.FC<VirtualProps> = ({
             transform: `translate3d(${positions[index]?.offsetX}px, ${positions[index]?.offsetY}px, 0px)`
           }}
         >
-          {/* {children} */}
-          <div className='h-full w-full bg-red-400'>{index}</div>
+          {React.cloneElement(children, { data })}
         </section>
       ))}
     </div>
