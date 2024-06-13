@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { cookies } from 'next/headers';
-import { Command, Search, AlignRight, Bell } from 'lucide-react';
+import { Command, Search, AlignLeft, Bell } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
+import SearchCommand from '../search-command';
 
 import CartDrawer from '../cart-drawer';
 import { Icons } from '../icons';
@@ -15,6 +16,7 @@ import { getUser } from '@/lib/get-user';
 import MobileNav from './tools/mobile-nav';
 import ThemeDropdown from './tools/theme-dropdown';
 import NavigationGroup from './components/navigation-group';
+import { cn } from '@/lib/utils';
 
 type NavBarProps = {};
 
@@ -23,13 +25,14 @@ const NavBar: React.FC<NavBarProps> = async () => {
 
   const user = await getUser(cookieStore);
 
-  const valid = true;
+  const valid = false;
 
   return (
     <header className='sticky inset-x-0 top-0 z-50 border-b border-gray-200 bg-transparent backdrop-blur-xl'>
-      <div className='mx-auto flex h-16 max-w-screen-2xl items-center px-8'>
+      <div className='mx-auto flex h-16 max-w-screen-2xl items-center px-4 transition-all md:px-8'>
+        <AlignLeft className='mr-4 h-6 w-6 cursor-pointer md:mr-6 lg:hidden' />
         <Link href='/'>
-          <Icons.logo className='h-6 w-6' />
+          <Icons.logo className='h-7 w-7' />
         </Link>
         <nav className='ml-4 flex items-center gap-2 max-lg:hidden'>
           <Link
@@ -50,15 +53,18 @@ const NavBar: React.FC<NavBarProps> = async () => {
           >
             Subscribe
           </Link>
+          <Link
+            href='/share'
+            className={buttonVariants({ variant: 'ghost', size: 'sm' })}
+          >
+            Share
+          </Link>
         </nav>
 
-        <nav className='ml-auto flex items-center gap-3 lg:hidden'>
-          <Search className='h-5 w-5 cursor-pointer' />
-          <AlignRight className='h-5 w-5 cursor-pointer' />
-        </nav>
+        <nav className='ml-auto flex items-center gap-4'>
+          <Search className='h-5 w-5 cursor-pointer md:hidden' />
 
-        <nav className='ml-auto flex items-center gap-4 max-lg:hidden'>
-          <button className='flex h-8 w-60 items-center justify-between whitespace-nowrap rounded-md bg-zinc-100 px-2 text-sm text-gray-400'>
+          <button className='flex h-8 w-60 items-center justify-between whitespace-nowrap rounded-md bg-zinc-100 px-2 text-sm text-gray-400 max-md:hidden'>
             Type keywords...
             <div className='ml-4 flex h-5 items-center rounded-md bg-white px-1.5 text-xs font-medium leading-5 text-gray-950 ring-1 ring-inset ring-gray-200'>
               <Command className='h-3 w-3' />
@@ -92,7 +98,7 @@ const NavBar: React.FC<NavBarProps> = async () => {
           {!valid && (
             <Link
               href='/sign-in'
-              className={buttonVariants({ variant: 'outline', size: 'sm' })}
+              className={buttonVariants({ variant: 'default', size: 'sm' })}
             >
               Sign in
             </Link>
@@ -101,7 +107,10 @@ const NavBar: React.FC<NavBarProps> = async () => {
           {!valid && (
             <Link
               href='/sign-up'
-              className={buttonVariants({ variant: 'default', size: 'sm' })}
+              className={cn(
+                'max-lg:hidden',
+                buttonVariants({ variant: 'default', size: 'sm' })
+              )}
             >
               Get Started
             </Link>
@@ -151,6 +160,7 @@ const NavBar: React.FC<NavBarProps> = async () => {
             </div>
           </div> */}
       </div>
+      <SearchCommand />
     </header>
   );
 };
