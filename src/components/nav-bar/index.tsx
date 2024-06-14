@@ -1,21 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { cookies } from 'next/headers';
-import { Command, Search, AlignLeft, Bell } from 'lucide-react';
+import { AlignLeft, Bell } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
-import SearchCommand from '../search-command';
 
-import CartDrawer from '../cart-drawer';
+import CommandButton from './components/command-button';
 import { Icons } from '../icons';
-import MaxWidthWraper from '../max-width-wraper';
-import { Button, buttonVariants } from '../ui/button';
-import NavGroup from './tools/nav-group';
-import ProfileDropdown from './tools/profile-dropdown';
+import { buttonVariants } from '../ui/button';
 import { getUser } from '@/lib/get-user';
-import MobileNav from './tools/mobile-nav';
-import ThemeDropdown from './tools/theme-dropdown';
-import NavigationGroup from './components/navigation-group';
 import { cn } from '@/lib/utils';
 
 type NavBarProps = {};
@@ -62,15 +55,7 @@ const NavBar: React.FC<NavBarProps> = async () => {
         </nav>
 
         <nav className='ml-auto flex items-center gap-4'>
-          <Search className='h-5 w-5 cursor-pointer md:hidden' />
-
-          <button className='flex h-8 w-60 items-center justify-between whitespace-nowrap rounded-md bg-zinc-100 px-2 text-sm text-gray-400 max-md:hidden'>
-            Type keywords...
-            <div className='ml-4 flex h-5 items-center rounded-md bg-white px-1.5 text-xs font-medium leading-5 text-gray-950 ring-1 ring-inset ring-gray-200'>
-              <Command className='h-3 w-3' />
-              <span>K</span>
-            </div>
-          </button>
+          <CommandButton />
 
           <Separator orientation='vertical' className='h-4' />
 
@@ -98,7 +83,7 @@ const NavBar: React.FC<NavBarProps> = async () => {
           {!valid && (
             <Link
               href='/sign-in'
-              className={buttonVariants({ variant: 'default', size: 'sm' })}
+              className={buttonVariants({ variant: 'outline', size: 'sm' })}
             >
               Sign in
             </Link>
@@ -116,14 +101,13 @@ const NavBar: React.FC<NavBarProps> = async () => {
             </Link>
           )}
         </nav>
-
-        {/* <MobileNav /> */}
-
-        {/* <div className='max-lg:hidden lg:ml-8 lg:self-stretch'>
+      </div>
+      {/* <MobileNav /> */}
+      {/* <div className='max-lg:hidden lg:ml-8 lg:self-stretch'>
             <NavGroup />
           </div> */}
 
-        {/* <div className='ml-auto hidden lg:flex lg:items-center lg:justify-end lg:space-x-6'>
+      {/* <div className='ml-auto hidden lg:flex lg:items-center lg:justify-end lg:space-x-6'>
             {!user && (
               <Link
                 href='/sign-in'
@@ -159,8 +143,6 @@ const NavBar: React.FC<NavBarProps> = async () => {
               <CartDrawer />
             </div>
           </div> */}
-      </div>
-      <SearchCommand />
     </header>
   );
 };
