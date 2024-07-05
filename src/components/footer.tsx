@@ -7,6 +7,7 @@ import { Sun, Moon, Laptop2, Github, Twitter } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 import MaxWidthWraper from './max-width-wraper';
+import { Separator } from '@/components/ui/separator';
 
 type FooterProps = {};
 
@@ -14,17 +15,12 @@ const Footer: React.FC<FooterProps> = ({}) => {
   const { setTheme } = useTheme();
 
   return (
-    <footer className='border-t border-gray-200 px-6 py-8'>
+    <footer className='border-t border-gray-200 py-8'>
       <MaxWidthWraper>
         <div className='flex items-center justify-between'>
-          <div className='flex flex-col gap-2'>
-            <p className='text-muted-foreground'>
-              &copy; {new Date().getFullYear()} Snake, Inc.
-            </p>
-            <div className='text-sm text-muted-foreground'>
-              Made with <span className='text-rose-400'>❤</span> by
-            </div>
-          </div>
+          <p className='text-xs text-muted-foreground'>
+            Made with <span className='text-rose-400'>❤</span> by
+          </p>
           <ToggleGroup
             type='single'
             size='sm'
@@ -32,47 +28,30 @@ const Footer: React.FC<FooterProps> = ({}) => {
             onValueChange={value => setTheme(value)}
           >
             <ToggleGroupItem value='light'>
-              <Sun className='h-5 w-5 text-gray-600' />
+              <Sun className='h-4 w-4 text-gray-600' />
             </ToggleGroupItem>
             <ToggleGroupItem value='dark'>
-              <Moon className='h-5 w-5 text-gray-600' />
+              <Moon className='h-4 w-4 text-gray-600' />
             </ToggleGroupItem>
             <ToggleGroupItem value='device'>
-              <Laptop2 className='h-5 w-5 text-gray-600' />
+              <Laptop2 className='h-4 w-4 text-gray-600' />
             </ToggleGroupItem>
           </ToggleGroup>
         </div>
-      </MaxWidthWraper>
-
-      {/* <MaxWidthWraper>
-        <div className='py-10 md:flex md:items-center md:justify-between'>
-          <div className='max-md:text-center'>
-            <p className='text-sm text-muted-foreground'>
-              &copy; {new Date().getFullYear()} All Rights Reserved
-            </p>
-          </div>
-          <div className='flex items-center justify-center space-x-8 max-md:mt-4'>
-            <Link
-              href='#'
-              className='text-sm text-muted-foreground hover:text-gray-600'
-            >
-              Terms
-            </Link>
-            <Link
-              href='#'
-              className='text-sm text-muted-foreground hover:text-gray-600'
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href='#'
-              className='text-sm text-muted-foreground hover:text-gray-600'
-            >
-              Cookie Policy
-            </Link>
+        {/* <div className='my-2 border-b border-gray-200' /> */}
+        <div className='flex gap-6 text-xs'>
+          <p className='text-muted-foreground'>
+            版权所有 &copy; {new Date().getFullYear()} Beta, Inc.
+          </p>
+          <div className='flex gap-2 text-muted-foreground'>
+            <Link href='/'>使用条款</Link>
+            <Separator orientation='vertical' className='h-4' />
+            <Link href='/'>隐私政策</Link>
+            <Separator orientation='vertical' className='h-4' />
+            <Link href='/'>协议和准则</Link>
           </div>
         </div>
-      </MaxWidthWraper> */}
+      </MaxWidthWraper>
     </footer>
   );
 };

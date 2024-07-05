@@ -10,6 +10,7 @@ import { Icons } from '../icons';
 import { buttonVariants } from '../ui/button';
 import { getUser } from '@/lib/get-user';
 import { cn } from '@/lib/utils';
+import MaxWidthWraper from '../max-width-wraper';
 
 type NavBarProps = {};
 
@@ -22,86 +23,90 @@ const NavBar: React.FC<NavBarProps> = async () => {
 
   return (
     <header className='sticky inset-x-0 top-0 z-50 border-b border-gray-200 bg-transparent backdrop-blur-xl'>
-      <div className='mx-auto flex h-16 max-w-screen-2xl items-center px-4 transition-all md:px-8'>
-        <AlignLeft className='mr-4 h-6 w-6 cursor-pointer md:mr-6 lg:hidden' />
-        <Link href='/'>
-          <Icons.logo className='h-7 w-7' />
-        </Link>
-        <nav className='ml-4 flex items-center gap-2 max-lg:hidden'>
-          <Link
-            href='/share'
-            className={buttonVariants({ variant: 'ghost', size: 'sm' })}
-          >
-            Share
+      <MaxWidthWraper>
+        <div className='flex h-16 items-center transition-all'>
+          {/* <AlignLeft className='mr-4 h-6 w-6 cursor-pointer md:mr-6 lg:hidden' /> */}
+          <Link className='flex items-center gap-3' href='/'>
+            <Icons.logo className='h-6 w-6' />
+            <h1 className='text-2xl font-medium'>Beta</h1>
           </Link>
-          <Link
-            href='/popular'
-            className={buttonVariants({ variant: 'ghost', size: 'sm' })}
-          >
-            Popular
-          </Link>
-          <Link
-            href='/subscribe'
-            className={buttonVariants({ variant: 'ghost', size: 'sm' })}
-          >
-            Subscribe
-          </Link>
-          <Link
-            href='/share'
-            className={buttonVariants({ variant: 'ghost', size: 'sm' })}
-          >
-            Share
-          </Link>
-        </nav>
 
-        <nav className='ml-auto flex items-center gap-4'>
-          <CommandButton />
-
-          <Separator orientation='vertical' className='h-4' />
-
-          {valid && (
-            <div className='relative'>
-              <Bell className='h-5 w-5 cursor-pointer text-gray-800 transition-all hover:scale-105' />
-              <p className='absolute -right-0.5 -top-0.5 h-1 w-1 animate-pulse rounded-full bg-red-600' />
-            </div>
-          )}
-
-          {valid && <Separator orientation='vertical' className='h-4' />}
-
-          {valid && (
-            <Link href='/user'>
-              <Avatar className='h-8 w-8 cursor-pointer transition-all hover:scale-105'>
-                <AvatarImage
-                  src='https://github.com/shadcn.png'
-                  alt='@shadcn'
-                />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            </Link>
-          )}
-
-          {!valid && (
+          <nav className='ml-4 flex items-center gap-2 max-lg:hidden'>
             <Link
-              href='/sign-in'
-              className={buttonVariants({ variant: 'outline', size: 'sm' })}
+              href='/share'
+              className={buttonVariants({ variant: 'ghost', size: 'sm' })}
             >
-              Sign in
+              Share
             </Link>
-          )}
-
-          {!valid && (
             <Link
-              href='/sign-up'
-              className={cn(
-                'max-lg:hidden',
-                buttonVariants({ variant: 'default', size: 'sm' })
-              )}
+              href='/popular'
+              className={buttonVariants({ variant: 'ghost', size: 'sm' })}
             >
-              Get Started
+              Popular
             </Link>
-          )}
-        </nav>
-      </div>
+            <Link
+              href='/subscribe'
+              className={buttonVariants({ variant: 'ghost', size: 'sm' })}
+            >
+              Subscribe
+            </Link>
+            <Link
+              href='/share'
+              className={buttonVariants({ variant: 'ghost', size: 'sm' })}
+            >
+              Share
+            </Link>
+          </nav>
+
+          <nav className='ml-auto flex items-center gap-4'>
+            <CommandButton />
+
+            <Separator orientation='vertical' className='h-4' />
+
+            {valid && (
+              <div className='relative'>
+                <Bell className='h-5 w-5 cursor-pointer text-gray-800 transition-all hover:scale-105' />
+                <p className='absolute -right-0.5 -top-0.5 h-1 w-1 animate-pulse rounded-full bg-red-600' />
+              </div>
+            )}
+
+            {valid && <Separator orientation='vertical' className='h-4' />}
+
+            {valid && (
+              <Link href='/user'>
+                <Avatar className='h-8 w-8 cursor-pointer transition-all hover:scale-105'>
+                  <AvatarImage
+                    src='https://github.com/shadcn.png'
+                    alt='@shadcn'
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </Link>
+            )}
+
+            {!valid && (
+              <Link
+                href='/aaaa'
+                className={buttonVariants({ variant: 'outline', size: 'sm' })}
+              >
+                Sign in
+              </Link>
+            )}
+
+            {!valid && (
+              <Link
+                href='/sign-up'
+                className={cn(
+                  'max-lg:hidden',
+                  buttonVariants({ variant: 'default', size: 'sm' })
+                )}
+              >
+                Get Started
+              </Link>
+            )}
+          </nav>
+        </div>
+      </MaxWidthWraper>
       {/* <MobileNav /> */}
       {/* <div className='max-lg:hidden lg:ml-8 lg:self-stretch'>
             <NavGroup />

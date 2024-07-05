@@ -5,8 +5,8 @@ export async function middleware({ nextUrl, cookies, url }: NextRequest) {
   // const user = await getUser(cookies);
 
   // if (user && ['/sign-in', '/sign-up'].includes(nextUrl.pathname)) {
-  //   return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SERVER_URL}/`);
   // }
 
+  // NextResponse.redirect(`${process.env.NEXT_PUBLIC_SERVER_URL}/sign-in`);
   return NextResponse.next();
 }
