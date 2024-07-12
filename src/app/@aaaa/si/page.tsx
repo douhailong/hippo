@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 
 import React, { useEffect, useState } from 'react';
 import {
@@ -24,22 +24,22 @@ import {
 } from '@/components/ui/command';
 
 const Page = () => {
-  const [open, setOpen] = useState(true);
+  // const [open, setOpen] = useState(true);
 
-  useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      if (e.key === 'j' && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        setOpen(true);
-      }
-    };
+  // useEffect(() => {
+  //   const down = (e: KeyboardEvent) => {
+  //     if (e.key === 'j' && (e.metaKey || e.ctrlKey)) {
+  //       e.preventDefault();
+  //       setOpen(true);
+  //     }
+  //   };
 
-    document.addEventListener('keydown', down);
-    return () => document.removeEventListener('keydown', down);
-  }, []);
+  //   document.addEventListener('keydown', down);
+  //   return () => document.removeEventListener('keydown', down);
+  // }, []);
 
   return (
-    <>
+    <main>
       {/* <button
         className='flex h-8 w-60 items-center justify-between whitespace-nowrap rounded-md bg-zinc-100 px-2 text-sm text-gray-400 max-md:hidden'
         onClick={() => setOpen(true)}
@@ -54,7 +54,10 @@ const Page = () => {
         className='h-5 w-5 cursor-pointer md:hidden'
         onClick={() => setOpen(true)}
       /> */}
-      <CommandDialog open={open} onOpenChange={() => setOpen(false)}>
+      <CommandDialog
+        open
+        //  open={open} onOpenChange={() => setOpen(false)}
+      >
         <CommandInput placeholder='Type a command or search...' />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
@@ -92,7 +95,7 @@ const Page = () => {
           </CommandGroup>
         </CommandList>
       </CommandDialog>
-    </>
+    </main>
   );
 };
 

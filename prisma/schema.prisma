@@ -8,58 +8,76 @@ datasource db {
 }
 
 model User {
-  id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  email          String   @unique
-  avatar         String
-  nickname       String
-  account        String
-  desc           String
-  hashedPassword String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  notes          Note[]   @relation("notes")
-  // collects       Note[]   @relation("collects")
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  email String @unique
 }
 
 model Note {
-  id           String       @id @default(auto()) @map("_id") @db.ObjectId
-  title        String
-  desc         String
-  location     String
-  published    Boolean      @default(false)
-  private      Boolean      @default(false)
-  tags         Tag[]
-  images       Image[]
-  interactInfo InteractInfo
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
-  author       User?        @relation("notes", fields: [authorId], references: [id])
-  authorId     String?      @db.ObjectId
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  desc  String
+  title String
 }
 
-model Tag {
-  id     String  @id @default(auto()) @map("_id") @db.ObjectId
-  name   String
-  type   String
-  note   Note?   @relation(fields: [noteId], references: [id])
-  noteId String? @db.ObjectId
+enum Role {
+  visitor
+  user
+  admin
+  root
 }
 
-model Image {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId
-  width      Int
-  height     Int
-  urlPre     String  @unique
-  urlDefault String  @unique
-  note       Note?   @relation(fields: [noteId], references: [id])
-  noteId     String? @db.ObjectId
-}
+// model User {
+//   id             String   @id @default(auto()) @map("_id") @db.ObjectId
+//   email          String   @unique
+//   avatar         String
+//   nickname       String
+//   account        String
+//   desc           String
+//   hashedPassword String
+//   createdAt      DateTime @default(now())
+//   updatedAt      DateTime @updatedAt
+//   notes          Note[]   @relation("notes")
+//   // collects       Note[]   @relation("collects")
+// }
 
-type InteractInfo {
-  collected      Boolean
-  liked          Boolean
-  collectedCount Int
-  commentCount   Int
-  shareCount     Int
-  likedCount     Int
-}
+// model Note {
+//   id           String       @id @default(auto()) @map("_id") @db.ObjectId
+//   title        String
+//   desc         String
+//   location     String
+//   published    Boolean      @default(false)
+//   private      Boolean      @default(false)
+//   tags         Tag[]
+//   images       Image[]
+//   interactInfo InteractInfo
+//   createdAt    DateTime     @default(now())
+//   updatedAt    DateTime     @updatedAt
+//   author       User?        @relation("notes", fields: [authorId], references: [id])
+//   authorId     String?      @db.ObjectId
+// }
+
+// model Tag {
+//   id     String  @id @default(auto()) @map("_id") @db.ObjectId
+//   name   String
+//   type   String
+//   note   Note?   @relation(fields: [noteId], references: [id])
+//   noteId String? @db.ObjectId
+// }
+
+// model Image {
+//   id         String  @id @default(auto()) @map("_id") @db.ObjectId
+//   width      Int
+//   height     Int
+//   urlPre     String  @unique
+//   urlDefault String  @unique
+//   note       Note?   @relation(fields: [noteId], references: [id])
+//   noteId     String? @db.ObjectId
+// }
+
+// type InteractInfo {
+//   collected      Boolean
+//   liked          Boolean
+//   collectedCount Int
+//   commentCount   Int
+//   shareCount     Int
+//   likedCount     Int
+// }
