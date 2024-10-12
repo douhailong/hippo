@@ -18,7 +18,7 @@ const Note: React.FC<NoteProps> = ({
 }) => {
   return (
     <div
-      className={cn(className, 'h-full w-full bg-red-400')}
+      className={cn(className, 'h-full w-full bg-red-100')}
       // onClick={() => console.log(data, 'data')}
       {...restProps}
     >

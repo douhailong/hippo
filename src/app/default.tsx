@@ -1,6 +1,9 @@
-// import Default from './layout';
+import React from 'react';
 
-// export default Default;
-export default function Default() {
-  return 111;
-}
+type DefaultProps = {};
+
+const Default: React.FC<DefaultProps> = ({}) => {
+  return <div>Default</div>;
+};
+
+export default Default;

@@ -6,7 +6,7 @@ type PageProps = {};
 const Page: React.FC<PageProps> = ({}) => {
   return (
     <div>
-      <Link href='/si'>to</Link>
+      <Link href='/sign-ins'>to</Link>
     </div>
   );
 };

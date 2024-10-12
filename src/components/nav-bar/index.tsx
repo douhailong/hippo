@@ -86,7 +86,7 @@ const NavBar: React.FC<NavBarProps> = async () => {
 
             {!valid && (
               <Link
-                href='/aaaa'
+                href='/sign-in'
                 className={buttonVariants({ variant: 'outline', size: 'sm' })}
               >
                 Sign in

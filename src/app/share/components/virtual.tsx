@@ -11,7 +11,7 @@ type Position = {
   offsetY: number;
 };
 
-type VirtualProps = {
+type VirtualWaterfallProps = {
   gap: number;
   col: number;
   dataSource: Data[];
@@ -21,7 +21,7 @@ type VirtualProps = {
 
 export type VirtualNoteProps = {} & Data;
 
-const Virtual: React.FC<VirtualProps> = ({
+const VirtualWaterfall: React.FC<VirtualWaterfallProps> = ({
   gap,
   col,
   dataSource,
@@ -34,10 +34,8 @@ const Virtual: React.FC<VirtualProps> = ({
   const containerHeight = useRef(0);
 
   useEffect(() => {
-    const containerWidth = container.current?.clientWidth;
-    const noteWidth = containerWidth
-      ? (containerWidth - gap * (col - 1)) / col
-      : 0;
+    const containerWidth = container.current?.clientWidth ?? 0;
+    const noteWidth = (containerWidth - gap * (col - 1)) / col;
 
     const [positions, columns] = buildPositionsData(noteWidth);
     containerHeight.current = Math.max(...columns) - gap;
@@ -53,9 +51,8 @@ const Virtual: React.FC<VirtualProps> = ({
     // }
   }, [col, gap]);
 
-  console.log('xxxxxxxxxxxxxxx');
-
   const onBottomOut = () => onChange?.();
+  console.log('xxxxxxxxxxxxxxx');
 
   const buildMinColumn = (columns: number[]) => {
     const min = Math.min(...columns);
@@ -112,4 +109,4 @@ const Virtual: React.FC<VirtualProps> = ({
   );
 };
 
-export default Virtual;
+export default VirtualWaterfall;

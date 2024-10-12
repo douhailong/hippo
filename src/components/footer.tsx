@@ -15,7 +15,7 @@ const Footer: React.FC<FooterProps> = ({}) => {
   const { setTheme } = useTheme();
 
   return (
-    <footer className='border-t border-gray-200 py-8'>
+    <footer className='border-t border-gray-200 py-12'>
       <MaxWidthWraper>
         <div className='flex items-center justify-between'>
           <p className='text-xs text-muted-foreground'>
@@ -38,7 +38,7 @@ const Footer: React.FC<FooterProps> = ({}) => {
             </ToggleGroupItem>
           </ToggleGroup>
         </div>
-        {/* <div className='my-2 border-b border-gray-200' /> */}
+        {/* <div className='my-10 border-b border-gray-200' /> */}
         <div className='flex gap-6 text-xs'>
           <p className='text-muted-foreground'>
             版权所有 &copy; {new Date().getFullYear()} Beta, Inc.

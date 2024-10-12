@@ -7,16 +7,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  email String @unique
-}
+// model User {
+//   id    String @id @default(auto()) @map("_id") @db.ObjectId
+//   email String @unique
+// }
 
-model Note {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  desc  String
-  title String
-}
+// model Note {
+//   id    String @id @default(auto()) @map("_id") @db.ObjectId
+//   desc  String
+//   title String
+// }
 
 enum Role {
   visitor
@@ -25,19 +25,31 @@ enum Role {
   root
 }
 
-// model User {
-//   id             String   @id @default(auto()) @map("_id") @db.ObjectId
-//   email          String   @unique
-//   avatar         String
-//   nickname       String
-//   account        String
-//   desc           String
-//   hashedPassword String
-//   createdAt      DateTime @default(now())
-//   updatedAt      DateTime @updatedAt
-//   notes          Note[]   @relation("notes")
-//   // collects       Note[]   @relation("collects")
-// }
+model User {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  email          String   @unique
+  account        String   @unique
+  avatar         String
+  nickname       String
+  desc           String?
+  hashedPassword String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  // relations
+  works          Work[]
+}
+
+model Work {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  title    String
+  desc     String?
+  like     Int     @default(0)
+  collecte Int     @default(0)
+  comment  Int     @default(0)
+  // relations
+  author   User    @relation(fields: [authorId], references: [id])
+  authorId String  @db.ObjectId
+}
 
 // model Note {
 //   id           String       @id @default(auto()) @map("_id") @db.ObjectId
